@@ -1,22 +1,23 @@
 {
-    "name": "prog3-gof",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
-    "scripts": {
-      "start":"node app.js",
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/tumostud/prog3.git"
-    },
-    "author": "tumostud",
-    "license": "ISC",
-    "dependencies": {
-      "express": "^4.16.2"
-    },
-    "engines": {
-      "node": "4.7.2"
-    }
+  "name": "prog3-gof",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tumostud/prog3.git"
+  },
+  "author": "tumostud",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.1.1"
+  },
+  "engines": {
+    "node": "4.7.2"
   }
+}

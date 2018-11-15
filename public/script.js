@@ -8,11 +8,36 @@ var grassEaterArr = [];
 var grassEaterEaterArr = [];
 var BombArr = [];
 var BombGeneratorArr = [];
+/*
+var weather =  {
+    0: 'winter',
+    1: 'spring',
+    2: 'summer',
+    3: 'autumn'
+}
+*/
+
+var days = 0;
+var weather = "winter";
+
+// What steps should be for the weather?
+// 
+// How to change weather by itself?
+// 
+// ...
+
+/*
+var w = weather["2"];
+if (w == weather["2"]) {
+    document.body.style.background = 'lightblue';
+    document.getElementById('weather').innerText = "Summer";
+}
+*/
 
 // Setup Function
 function setup() {
     /*
-        - This a n by m matrix.
+        - This is a n by m matrix.
 
         - If you want n by n matrix instead of n by m matrix, remove randMatrixRow and randMatrixCol,
         insert var randMatrix = Math.round(random(20, 200)); and set this variable to row and column variables.
@@ -76,6 +101,32 @@ function setup() {
 // Draw Function
 function draw() {
     drawMatrix();
+    days++
+    console.log(days);
+    if(days<=10){
+        weather = "winter";
+        document.body.style.background = '#c45454';
+        document.getElementById('weather').innerText = "Winter";
+    }
+    else if(days>10 && days<20){
+        weather = "spring";
+        document.body.style.background = 'lightgreen';
+        document.getElementById('weather').innerText = "Spring";
+    }
+    else if(days>20 && days<30){
+        weather = "summer";
+        document.body.style.background = 'lightblue';
+        document.getElementById('weather').innerText = "Summer";
+    }
+    else if(days>30 && days<40){
+        weather = "autumn";
+        document.body.style.background = 'yellow';
+        document.getElementById('weather').innerText = "Autumn";
+    }
+    else if (days == 41){
+        days = 0;
+    }
+    
     for (var i in grassArr) {
         grassArr[i].multGrass();
     }
