@@ -8,31 +8,10 @@ var grassEaterArr = [];
 var grassEaterEaterArr = [];
 var BombArr = [];
 var BombGeneratorArr = [];
-/*
-var weather =  {
-    0: 'winter',
-    1: 'spring',
-    2: 'summer',
-    3: 'autumn'
-}
-*/
+
 
 var days = 0;
 var weather = "winter";
-
-// What steps should be for the weather?
-// 
-// How to change weather by itself?
-// 
-// ...
-
-/*
-var w = weather["2"];
-if (w == weather["2"]) {
-    document.body.style.background = 'lightblue';
-    document.getElementById('weather').innerText = "Summer";
-}
-*/
 
 // Setup Function
 function setup() {
@@ -47,7 +26,8 @@ function setup() {
     var randMatrixRow = Math.round(random(20, 200));
     var randMatrixCol = Math.round(random(20, 200));
 
-    var row = randMatrixRow, column = randMatrixCol;
+    // var row = randMatrixRow, column = randMatrixCol;
+    var row = 50, column = 50;
 
     for (var y = 0; y < row; ++y) {
         matrix[y] = [];
@@ -102,28 +82,28 @@ function setup() {
 function draw() {
     drawMatrix();
     days++
-    console.log(days);
-    if(days<=10){
+    // console.log(days);
+    if(days <= 10){
         weather = "winter";
         document.body.style.background = '#c45454';
         document.getElementById('weather').innerText = "Winter";
     }
-    else if(days>10 && days<20){
+    else if(days > 10 && days < 20){
         weather = "spring";
         document.body.style.background = 'lightgreen';
         document.getElementById('weather').innerText = "Spring";
     }
-    else if(days>20 && days<30){
+    else if(days > 20 && days < 30){
         weather = "summer";
         document.body.style.background = 'lightblue';
         document.getElementById('weather').innerText = "Summer";
     }
-    else if(days>30 && days<40){
+    else if(days > 30 && days < 40){
         weather = "autumn";
-        document.body.style.background = 'yellow';
+        document.body.style.background = 'orange';
         document.getElementById('weather').innerText = "Autumn";
     }
-    else if (days == 41){
+    else if (days == 40){
         days = 0;
     }
     
@@ -150,7 +130,9 @@ function drawMatrix() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
-                fill("green");
+                if (weather == 'winter') { fill('white'); }
+                else if (weather == 'autumn') { fill('#e0bb28') }
+                else { fill("green"); }
                 rect(x * side, y * side, side, side);
             }
             else if (matrix[y][x] == 0) {

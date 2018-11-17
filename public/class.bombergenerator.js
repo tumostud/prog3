@@ -44,7 +44,12 @@ class BomberGenerator extends LivingCreature {
             }
 
             if (this.energy > 0 && this.energy <= 30 ) {
-                if (this.energy % 5 == 0) this.mult();
+                if (weather == 'winter' || weather == 'spring') {
+                    if (this.energy % 5 == 0) this.mult(); // On Winter and Spring the generator will generate bombs when the energy number is divisible by 5
+                }
+                else {
+                    if (this.energy % 2 == 1) this.mult(); // On Summer and Autumn the generator will generate bombs when the energy number is an odd number
+                }
             }
         }
     }

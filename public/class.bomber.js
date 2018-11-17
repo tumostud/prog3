@@ -39,13 +39,28 @@ class Bomber extends LivingCreature {
         ];
     }
 
+    getNewSmallCoordinates() {
+        this.directions = [
+            [this.x - 1, this.y - 1],
+            [this.x, this.y - 1],
+            [this.x + 1, this.y - 1],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
+            [this.x - 1, this.y + 1],
+            [this.x, this.y + 1],
+            [this.x + 1, this.y + 1]
+        ];
+    }
+
     chooseCell(character) {
-        this.getNewCoordinates();
+        if (weather == 'winter' || weather == 'spring') this.getNewSmallCoordinates();
+        else this.getNewCoordinates();
         return super.chooseCell(character);
     }
 
     killCell() {
-        this.getNewCoordinates();
+        if (weather == 'winter' || weather == 'spring') this.getNewSmallCoordinates(); // On Winter and Spring the explosion radius will be small
+        else this.getNewCoordinates(); // On Summer and Autumn the explosion radius will be bigger
 
         var found = [];
         for (var i in this.directions) {

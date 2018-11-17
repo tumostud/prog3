@@ -46,7 +46,7 @@ class GrassEater extends LivingCreature {
                 }
             }
 
-            if(this.energy >= 5) this.mult();
+            if(this.energy >= 4) this.mult();
         }
         else this.move();
     }
@@ -83,7 +83,9 @@ class GrassEater extends LivingCreature {
 
             grassEaterArr.push(new GrassEater(x,y));
 
-            this.energy = 3;
+            if (weather == 'winter') this.energy = 2; // On Winter multiply so little
+            else if (weather == 'summer') this.energy = 3; // On Summer multiply a bit more
+            else this.energy = 4; // On Spring and Autumn multiply regularly
         }
     }
 
