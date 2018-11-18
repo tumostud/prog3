@@ -94,23 +94,29 @@ function draw() {
     // console.log(days);
     if(days <= 10){
         weather = "winter";
-        document.body.style.background = '#c45454';
+        document.body.style.background = '#f7f7f7';
         document.getElementById('weather').innerText = "Winter";
     }
     else if(days > 10 && days < 20){
         weather = "spring";
         document.body.style.background = 'lightgreen';
         document.getElementById('weather').innerText = "Spring";
+        document.body.style.transition = 'all .7s ease-in';
+        document.getElementById('weather').style.transition = 'all .7s ease-in';
     }
     else if(days > 20 && days < 30){
         weather = "summer";
         document.body.style.background = 'lightblue';
         document.getElementById('weather').innerText = "Summer";
+        document.body.style.transition = 'all .7s ease-in';
+        document.getElementById('weather').style.transition = 'all .7s ease-in';
     }
     else if(days > 30 && days < 40){
         weather = "autumn";
         document.body.style.background = 'orange';
         document.getElementById('weather').innerText = "Autumn";
+        document.body.style.transition = 'all .7s ease-in';
+        document.getElementById('weather').style.transition = 'all .7s ease-in';
     }
     else if (days == 40){
         days = 0;
@@ -176,12 +182,36 @@ function drawMatrix() {
     }
 }
 
+function mouseClicked() {
+    console.log("Mouse clicked on coordinates x: " + mouseX + " and y: " + mouseY);
+    
+    // console.log(Math.round(mouseX / matrix[i][j]));
+    /*
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            console.log(y + '-' + x + ':' + matrix[y][x]);
+        }
+    }
+    */
+}
+
+/*
+
+1. Get mouse click
+2. Get the coordinates of the clicked square
+3. Check what character is in the square
+4. Work with the character inside that square
+  4.1 Remove the character
+  4.2 Add new character
+  4.3 Update both arrays of characters
+
+*/
 
 
 // Tasks
 // 1. Weather (Done)
 // 2. Gender
-// 3. Unique Situatuion
+// 3. Unique Situatuion (!!!)
 // 4. New Characters (6 or more) (Done) (6 Characters)
 // 5. Statistics
 // 6. Diagrams
