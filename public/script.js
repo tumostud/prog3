@@ -8,6 +8,7 @@ var grassEaterArr = [];
 var grassEaterEaterArr = [];
 var BombArr = [];
 var BombGeneratorArr = [];
+var BombDestroyerArr = []
 
 
 var days = 0;
@@ -33,7 +34,7 @@ function setup() {
         matrix[y] = [];
 
         for (var x = 0; x < column; ++x) {
-            matrix[y][x] = Math.round(random(0, 5));
+            matrix[y][x] = Math.round(random(0, 6));
         }
     }
 
@@ -73,6 +74,14 @@ function setup() {
             else if (matrix[y][x] == 5) {
                 var randBombGen = new BomberGenerator(x, y);
                 BombGeneratorArr.push(randBombGen);
+            }
+
+            else if (matrix[y][x] == 6) {
+                if (BombDestroyerArr.length <= 20) {
+                    var bombDest = new BomberDestroyer(x, y);
+                    BombDestroyerArr.push(bombDest);
+                }
+                else matrix[y][x] = 0;
             }
         }
     }
@@ -123,6 +132,10 @@ function draw() {
     for (var i in BombGeneratorArr) {
         BombGeneratorArr[i].move();
     }
+    for (var i in BombDestroyerArr) {
+        BombDestroyerArr[i].destroy();
+        // console.log(BombDestroyerArr[i].energy);
+    }
 }
 
 // Draw Matrix Function
@@ -130,12 +143,12 @@ function drawMatrix() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
-                if (weather == 'winter') { fill('white'); }
-                else if (weather == 'autumn') { fill('#e0bb28') }
-                else { fill("green"); }
+                if (weather == 'winter') { fill('white'); } // On Winter grass turns to white
+                else if (weather == 'autumn') { fill('#e0bb28') } //On Autumn grass turns to orange-yellow-ish color
+                else { fill("green"); } // On Spring and Summer grass is green
                 rect(x * side, y * side, side, side);
             }
-            else if (matrix[y][x] == 0) {
+             if (matrix[y][x] == 0) {
                 fill("#acacac");
                 rect(x * side, y * side, side, side);
             }
@@ -155,6 +168,20 @@ function drawMatrix() {
                 fill("blue");
                 rect(x * side, y * side, side, side);
             }
+            else if (matrix[y][x] == 6) {
+                fill("#09eded");
+                rect(x * side, y * side, side, side);
+            }
         }
     }
 }
+
+
+
+// Tasks
+// 1. Weather (Done)
+// 2. Gender
+// 3. Unique Situatuion
+// 4. New Characters (6 or more) (Done) (6 Characters)
+// 5. Statistics
+// 6. Diagrams
