@@ -14,6 +14,10 @@ var BombDestroyerArr = []
 var days = 0;
 var weather = "winter";
 
+var frameSec = 0;
+
+var cnv;
+
 // Setup Function
 function setup() {
     /*
@@ -39,7 +43,8 @@ function setup() {
     }
 
     frameRate(500);
-    createCanvas(matrix[0].length * side, matrix.length * side);
+    cnv = createCanvas(matrix[0].length * side, matrix.length * side);
+    cnv.mouseClicked(getCoords);
     background('#acacac');
 
     for (var y = 0; y < matrix.length; y++) {
@@ -91,7 +96,7 @@ function setup() {
 function draw() {
     drawMatrix();
     days++
-    // console.log(days);
+    frameSec++;
     if(days <= 10){
         weather = "winter";
         document.body.style.background = '#f7f7f7';
@@ -121,18 +126,23 @@ function draw() {
     else if (days == 40){
         days = 0;
     }
-    
-    for (var i in grassArr) {
-        grassArr[i].multGrass();
-    }
 
-    for (var i in grassEaterArr) {
+    if (frameSec == 11) {
+        //statistics();
+        frameSec = 0;
+    }
+    
+    /* for (var i in grassArr) {
+        grassArr[i].multGrass();
+    } */
+
+    /* for (var i in grassEaterArr) {
         grassEaterArr[i].eat();
     }
     for (var i in grassEaterEaterArr) {
         grassEaterEaterArr[i].eat();
-    }
-    for (var i in BombArr) {
+    } */
+    /* for (var i in BombArr) {
         BombArr[i].explode();
     }
     for (var i in BombGeneratorArr) {
@@ -141,20 +151,68 @@ function draw() {
     for (var i in BombDestroyerArr) {
         BombDestroyerArr[i].destroy();
         // console.log(BombDestroyerArr[i].energy);
+    } */
+}
+
+function mouseClicked() {
+    
+}
+
+function getCoords() {
+    var i, j;
+    console.log("Mouse clicked on coordinates x: " + mouseX + " and y: " + mouseY);
+    i = mouseX / 10;
+    i = Math.floor(i);
+    j = mouseY / 10;
+    j = Math.floor(j);
+    //console.log("i: " + i + " , j: " + j);
+    //console.log(matrix[j][i]);
+    if (matrix[j][i] == 2) {
+        console.log('Grass eater arr length: ' + grassEaterArr.length);
+        console.log('Grass eater eater arr length: ' + grassEaterEaterArr.length);
+        for (var k = 0; k < grassEaterArr.length; k++) {
+            if (grassEaterArr[k]['x'] == i && grassEaterArr[k]['y'] == j) {
+                console.log('Clicked grass eater object: ' + grassEaterArr[k]);
+                console.log(grassEaterArr[k]);
+                console.log('Clicked grass eater object\'s y coord: ' + grassEaterArr[k]['y']);
+                console.log('Clicked grass eater object\'s x coord: ' + grassEaterArr[k]['x']);
+                grassEaterArr[k].die();
+            }
+        }
+        console.log('Grass eater arr length: ' + grassEaterArr.length);
+        matrix[j][i] == 3;
+        var grEatEater = new GrassEaterEater(i, j);
+        grassEaterEaterArr.push(grEatEater);
+        console.log('Grass eater eater arr length: ' + grassEaterEaterArr.length);
+    }
+    if (matrix[j][i] == 3) {
+        console.log('It\'s red!');
     }
 }
+
+/*
+
+1. Get mouse click X
+2. Get the coordinates of the clicked square X
+3. Check what character is in the square X
+4. Work with the character inside that square X
+  4.1 Remove the character X
+  4.2 Add new character 
+  4.3 Update both arrays of characters X
+
+*/
 
 // Draw Matrix Function
 function drawMatrix() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 1) {
+            /* if (matrix[y][x] == 1) {
                 if (weather == 'winter') { fill('white'); } // On Winter grass turns to white
                 else if (weather == 'autumn') { fill('#e0bb28') } //On Autumn grass turns to orange-yellow-ish color
                 else { fill("green"); } // On Spring and Summer grass is green
                 rect(x * side, y * side, side, side);
-            }
-             if (matrix[y][x] == 0) {
+            } */
+            if (matrix[y][x] == 0) {
                 fill("#acacac");
                 rect(x * side, y * side, side, side);
             }
@@ -166,7 +224,7 @@ function drawMatrix() {
                 fill("red");
                 rect(x * side, y * side, side, side);
             }
-            else if (matrix[y][x] == 4) {
+            /* else if (matrix[y][x] == 4) {
                 fill("black");
                 rect(x * side, y * side, side, side);
             }
@@ -177,35 +235,10 @@ function drawMatrix() {
             else if (matrix[y][x] == 6) {
                 fill("#09eded");
                 rect(x * side, y * side, side, side);
-            }
+            } */
         }
     }
 }
-
-function mouseClicked() {
-    console.log("Mouse clicked on coordinates x: " + mouseX + " and y: " + mouseY);
-    
-    // console.log(Math.round(mouseX / matrix[i][j]));
-    /*
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            console.log(y + '-' + x + ':' + matrix[y][x]);
-        }
-    }
-    */
-}
-
-/*
-
-1. Get mouse click
-2. Get the coordinates of the clicked square
-3. Check what character is in the square
-4. Work with the character inside that square
-  4.1 Remove the character
-  4.2 Add new character
-  4.3 Update both arrays of characters
-
-*/
 
 
 // Tasks
@@ -215,3 +248,17 @@ function mouseClicked() {
 // 4. New Characters (6 or more) (Done) (6 Characters)
 // 5. Statistics
 // 6. Diagrams
+
+// Statistics
+
+function statistics() {
+    // var socket = io();
+    console.log('Works');
+    console.log(grassArr.length);
+    console.log(grassEaterArr.length);
+    console.log(grassEaterEaterArr.length);
+    console.log(BombArr.length);
+    console.log(BombGeneratorArr.length);
+    console.log(BombDestroyerArr.length);
+    console.log(weather);
+}
