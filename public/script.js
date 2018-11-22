@@ -8,8 +8,7 @@ var grassEaterArr = [];
 var grassEaterEaterArr = [];
 var BombArr = [];
 var BombGeneratorArr = [];
-var BombDestroyerArr = []
-
+var BombDestroyerArr = [];
 
 var days = 0;
 var weather = "winter";
@@ -90,6 +89,9 @@ function setup() {
             }
         }
     }
+    console.log(grassArr);
+    console.log(grassEaterArr);
+    console.log(grassEaterEaterArr);
 }
 
 // Draw Function
@@ -132,17 +134,18 @@ function draw() {
         frameSec = 0;
     }
     
-    /* for (var i in grassArr) {
+    for (var i in grassArr) {
         grassArr[i].multGrass();
-    } */
+    }
 
-    /* for (var i in grassEaterArr) {
+    for (var i in grassEaterArr) {
         grassEaterArr[i].eat();
+        //if (grassEaterArr[i].gend() == 1) { console.log(grassEaterArr[i]); }
     }
     for (var i in grassEaterEaterArr) {
         grassEaterEaterArr[i].eat();
-    } */
-    /* for (var i in BombArr) {
+    }
+    for (var i in BombArr) {
         BombArr[i].explode();
     }
     for (var i in BombGeneratorArr) {
@@ -151,13 +154,10 @@ function draw() {
     for (var i in BombDestroyerArr) {
         BombDestroyerArr[i].destroy();
         // console.log(BombDestroyerArr[i].energy);
-    } */
+    }
 }
 
-function mouseClicked() {
-    
-}
-
+function mouseClicked() {}
 function getCoords() {
     var i, j;
     console.log("Mouse clicked on coordinates x: " + mouseX + " and y: " + mouseY);
@@ -168,30 +168,38 @@ function getCoords() {
     //console.log("i: " + i + " , j: " + j);
     //console.log(matrix[j][i]);
     if (matrix[j][i] == 2) {
-        console.log('Grass eater arr length: ' + grassEaterArr.length);
-        console.log('Grass eater eater arr length: ' + grassEaterEaterArr.length);
+        //console.log('Grass eater arr length: ' + grassEaterArr.length);
+        //console.log('Grass eater eater arr length: ' + grassEaterEaterArr.length);
         for (var k = 0; k < grassEaterArr.length; k++) {
             if (grassEaterArr[k]['x'] == i && grassEaterArr[k]['y'] == j) {
-                console.log('Clicked grass eater object: ' + grassEaterArr[k]);
-                console.log(grassEaterArr[k]);
-                console.log('Clicked grass eater object\'s y coord: ' + grassEaterArr[k]['y']);
-                console.log('Clicked grass eater object\'s x coord: ' + grassEaterArr[k]['x']);
+                //console.log('Clicked grass eater object:');
+                //console.log(grassEaterArr[k]);
+                //console.log('Clicked grass eater object\'s y coord: ' + grassEaterArr[k]['y']);
+                //console.log('Clicked grass eater object\'s x coord: ' + grassEaterArr[k]['x']);
                 grassEaterArr[k].die();
+                matrix[j][i] = 3;
+                var grEatEater = new GrassEaterEater(i, j);
+                grassEaterEaterArr.push(grEatEater);
             }
         }
-        console.log('Grass eater arr length: ' + grassEaterArr.length);
-        matrix[j][i] == 3;
-        var grEatEater = new GrassEaterEater(i, j);
-        grassEaterEaterArr.push(grEatEater);
-        console.log('Grass eater eater arr length: ' + grassEaterEaterArr.length);
+        console.log('It\'s yellow!');
+        //console.log('Grass eater arr length: ' + grassEaterArr.length);
+        //console.log('Grass eater eater arr length: ' + grassEaterEaterArr.length);
     }
-    if (matrix[j][i] == 3) {
+    else if (matrix[j][i] == 3) {
+        for (var k = 0; k < grassEaterEaterArr.length; k++) {
+            if (grassEaterEaterArr[k]['x'] == i && grassEaterEaterArr[k]['y'] == j) {
+                grassEaterEaterArr[k].die();
+                matrix[j][i] = 2;
+                var grEater = new GrassEater(i, j);
+                grassEaterArr.push(grEater);
+            }
+        }
         console.log('It\'s red!');
     }
 }
 
 /*
-
 1. Get mouse click X
 2. Get the coordinates of the clicked square X
 3. Check what character is in the square X
@@ -199,24 +207,23 @@ function getCoords() {
   4.1 Remove the character X
   4.2 Add new character 
   4.3 Update both arrays of characters X
-
 */
 
 // Draw Matrix Function
 function drawMatrix() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
-            /* if (matrix[y][x] == 1) {
+            if (matrix[y][x] == 1) {
                 if (weather == 'winter') { fill('white'); } // On Winter grass turns to white
                 else if (weather == 'autumn') { fill('#e0bb28') } //On Autumn grass turns to orange-yellow-ish color
                 else { fill("green"); } // On Spring and Summer grass is green
                 rect(x * side, y * side, side, side);
-            } */
+            }
             if (matrix[y][x] == 0) {
                 fill("#acacac");
                 rect(x * side, y * side, side, side);
             }
-            else if (matrix[y][x] == 2) {
+            else if (matrix[y][x] == 2 && matrix[y][x]) {
                 fill("yellow");
                 rect(x * side, y * side, side, side);
             }
@@ -224,7 +231,7 @@ function drawMatrix() {
                 fill("red");
                 rect(x * side, y * side, side, side);
             }
-            /* else if (matrix[y][x] == 4) {
+            else if (matrix[y][x] == 4) {
                 fill("black");
                 rect(x * side, y * side, side, side);
             }
@@ -235,19 +242,10 @@ function drawMatrix() {
             else if (matrix[y][x] == 6) {
                 fill("#09eded");
                 rect(x * side, y * side, side, side);
-            } */
+            }
         }
     }
 }
-
-
-// Tasks
-// 1. Weather (Done)
-// 2. Gender
-// 3. Unique Situatuion (!!!)
-// 4. New Characters (6 or more) (Done) (6 Characters)
-// 5. Statistics
-// 6. Diagrams
 
 // Statistics
 
@@ -262,3 +260,17 @@ function statistics() {
     console.log(BombDestroyerArr.length);
     console.log(weather);
 }
+
+
+
+
+
+
+
+// Tasks
+// 1. Weather (Done)
+// 2. Gender 
+// 3. Unique Situatuion (Done)
+// 4. New Characters (6 or more) (Done) (6 Characters)
+// 5. Statistics (!!X!!)
+// 6. Diagrams (Not necessary)
