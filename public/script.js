@@ -89,9 +89,9 @@ function setup() {
             }
         }
     }
-    console.log(grassArr);
+    /* console.log(grassArr);
     console.log(grassEaterArr);
-    console.log(grassEaterEaterArr);
+    console.log(grassEaterEaterArr); */
 }
 
 // Draw Function
@@ -140,7 +140,6 @@ function draw() {
 
     for (var i in grassEaterArr) {
         grassEaterArr[i].eat();
-        //if (grassEaterArr[i].gend() == 1) { console.log(grassEaterArr[i]); }
     }
     for (var i in grassEaterEaterArr) {
         grassEaterEaterArr[i].eat();

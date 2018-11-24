@@ -25,9 +25,9 @@ class GrassEater extends LivingCreature {
         return super.chooseCell(character);
     }
 
-    gend() {
+    /* gend() {
         return this.gender;
-    }
+    } */
 
     eat() {
         var grassCells = this.chooseCell(1);
@@ -75,14 +75,13 @@ class GrassEater extends LivingCreature {
             }
         }
     }
-
-    
+ 
     mult() {
         var emptyCells = this.chooseCell(0);
         if (emptyCells.length != 0) {
             var randomCell = random(emptyCells);
-            //console.log(randomCell);
-            //console.log(this.gender);
+            console.log(emptyCells.length);
+            console.log(this.gender);
 
             var x = randomCell[0];
             var y = randomCell[1];
@@ -97,8 +96,7 @@ class GrassEater extends LivingCreature {
             else this.energy = 4; // On Spring and Autumn multiply regularly
         }
     }
-    
-    
+
 /*
     
     mult() {
@@ -120,7 +118,7 @@ class GrassEater extends LivingCreature {
             else this.energy = 4; // On Spring and Autumn multiply regularly
         }
     }
-    */
+*/
 
     die() {
         matrix[this.y][this.x] = 0;
