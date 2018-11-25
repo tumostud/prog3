@@ -2,7 +2,7 @@
 class GrassEater extends LivingCreature {
     constructor(x, y) {
         super(x, y);
-        this.gender = Math.round(Math.random());
+        this.gender = Math.round(Math.random()); // 0 - Female, 1 - Male
         this.energy = Math.round(random(6, 8));
         this.directions = [];
     }
@@ -51,7 +51,7 @@ class GrassEater extends LivingCreature {
                 }
             }
 
-            if(this.energy >= 4) this.mult();
+            if (this.energy >= 4) this.mult();
         }
         else this.move();
     }
@@ -75,50 +75,30 @@ class GrassEater extends LivingCreature {
             }
         }
     }
- 
+
     mult() {
-        var emptyCells = this.chooseCell(0);
-        if (emptyCells.length != 0) {
-            var randomCell = random(emptyCells);
-            console.log(emptyCells.length);
-            console.log(this.gender);
+        if (this.gender == 0) {
+            var emptyCells = this.chooseCell(0);
+            if (emptyCells.length != 0) {
+                var randomCell = random(emptyCells);
+                //console.log(emptyCells.length);
+                //console.log(this.gender);
 
-            var x = randomCell[0];
-            var y = randomCell[1];
-
-            matrix[y][x] = 2;
-
-            grassEaterArr.push(new GrassEater(x,y));
-            //console.log('Done');
-
-            if (weather == 'winter') this.energy = 2; // On Winter multiply so little
-            else if (weather == 'summer') this.energy = 3; // On Summer multiply a bit more
-            else this.energy = 4; // On Spring and Autumn multiply regularly
-        }
-    }
-
-/*
-    
-    mult() {
-        var emptyCells = this.chooseCell(2);
-        if (emptyCells.length != 0) {
-            var randomCell = random(emptyCells);
-            if (this.gender == 1) {
                 var x = randomCell[0];
                 var y = randomCell[1];
 
                 matrix[y][x] = 2;
 
-                grassEaterArr.push(new GrassEater(x,y));
-                console.log('Done');
-            }
+                grassEaterArr.push(new GrassEater(x, y));
+                //console.log('Done');
 
-            if (weather == 'winter') this.energy = 2; // On Winter multiply so little
-            else if (weather == 'summer') this.energy = 3; // On Summer multiply a bit more
-            else this.energy = 4; // On Spring and Autumn multiply regularly
+                if (weather == 'winter') this.energy = 2; // On Winter multiply so little
+                else if (weather == 'summer') this.energy = 3; // On Summer multiply a bit more
+                else this.energy = 4; // On Spring and Autumn multiply regularly
+            }
         }
+
     }
-*/
 
     die() {
         matrix[this.y][this.x] = 0;

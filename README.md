@@ -1,1 +1,2 @@
-# Programming 3
+# GoF - Final Project | Programming 3
+## Description:

@@ -89,9 +89,11 @@ function setup() {
             }
         }
     }
-    /* console.log(grassArr);
+    /*
+    console.log(grassArr);
     console.log(grassEaterArr);
-    console.log(grassEaterEaterArr); */
+    console.log(grassEaterEaterArr);
+    */
 }
 
 // Draw Function
@@ -268,8 +270,7 @@ function statistics() {
 
 // Tasks
 // 1. Weather (Done)
-// 2. Gender 
+// 2. Gender
 // 3. Unique Situatuion (Done)
 // 4. New Characters (6 or more) (Done) (6 Characters)
-// 5. Statistics (!!X!!)
-// 6. Diagrams (Not necessary)
+// 5. Statistics

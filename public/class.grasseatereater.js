@@ -78,7 +78,7 @@ class GrassEaterEater extends LivingCreature {
             var x = randomCell[0];
             var y = randomCell[1];
 
-            matrix[y][x] = 2;
+            matrix[y][x] = 3;
 
             grassEaterArr.push(new GrassEaterEater(x,y));
 
