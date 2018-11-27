@@ -1,5 +1,11 @@
+// IO Socket
+var socket = io.connect('http://localhost:3000');
+
 // Matrix
 var matrix = [];
+
+// Canvas
+var cnv;
 
 // Side and Character Arrays
 var side = 10;
@@ -10,12 +16,32 @@ var BombArr = [];
 var BombGeneratorArr = [];
 var BombDestroyerArr = [];
 
+// Day counter and weather (seasons)
 var days = 0;
 var weather = "winter";
 
+// Frame Seconds
 var frameSec = 0;
 
-var cnv;
+// Grass Eater to Grass Eater Eater Counter
+var geTogee = 0;
+// Grass Eater Eater to Grass Eater Counter
+var geeToge = 0;
+
+// Statistics Object
+var statistics = {
+    "timestamp": "",
+    "grassSpawn": 0,
+    "grassEaterSpawn": 0,
+    "grassEaterEaterSpawn": 0,
+    "bombSpawn": 0,
+    "bombGeneratorSpawn": 0,
+    "bombdestroyerSpawn": 0,
+    "weather": "",
+    "geTogee": 0,
+    "geeToge": 0
+}
+
 
 // Setup Function
 function setup() {
@@ -130,7 +156,7 @@ function draw() {
     }
 
     if (frameSec == 11) {
-        //statistics();
+        generateStatistics();
         frameSec = 0;
     }
     
@@ -154,6 +180,7 @@ function draw() {
         BombDestroyerArr[i].destroy();
         // console.log(BombDestroyerArr[i].energy);
     }
+    
 }
 
 function mouseClicked() {}
@@ -181,6 +208,7 @@ function getCoords() {
                 grassEaterEaterArr.push(grEatEater);
             }
         }
+        geTogee++;
         console.log('It\'s yellow!');
         //console.log('Grass eater arr length: ' + grassEaterArr.length);
         //console.log('Grass eater eater arr length: ' + grassEaterEaterArr.length);
@@ -194,6 +222,7 @@ function getCoords() {
                 grassEaterArr.push(grEater);
             }
         }
+        geeToge++;
         console.log('It\'s red!');
     }
 }
@@ -248,16 +277,30 @@ function drawMatrix() {
 
 // Statistics
 
-function statistics() {
-    // var socket = io();
-    console.log('Works');
-    console.log(grassArr.length);
-    console.log(grassEaterArr.length);
-    console.log(grassEaterEaterArr.length);
-    console.log(BombArr.length);
-    console.log(BombGeneratorArr.length);
-    console.log(BombDestroyerArr.length);
-    console.log(weather);
+function generateStatistics() {
+    statistics.timestamp = (new Date()).toString();
+    statistics.grassSpawn = grassArr.length;
+    statistics.grassEaterSpawn = grassEaterArr.length;
+    statistics.grassEaterEaterSpawn = grassEaterEaterArr.length;
+    statistics.bombSpawn = BombArr.length;
+    statistics.bombGeneratorSpawn = BombGeneratorArr.length;
+    statistics.bombdestroyerSpawn = BombDestroyerArr.length;
+    statistics.weather = weather;
+    statistics.geTogee = geTogee;
+    statistics.geeToge = geeToge;
+    socket.emit("send data", statistics);
+    console.log('-------');
+    console.log("Note: Spawn numbers are not the initial spawn numbers, but the number of overall spawns till this moment (including getting destroyed and spawned again)!!");
+    console.log("Grasses Spawned: " + grassArr.length);
+    console.log("Grass Eaters Spawned: " + grassEaterArr.length);
+    console.log("Grass Eater Eaters Spawned: " + grassEaterEaterArr.length);
+    console.log("Bombs Spawned: " + BombArr.length);
+    console.log("Bomb Generators Spawned: " + BombGeneratorArr.length);
+    console.log("Bomb Destroyers Spawned: " + BombDestroyerArr.length);
+    console.log("Weather (Season): " + weather);
+    console.log("geTogee: " + geTogee);
+    console.log("geeToge: " + geeToge);
+    console.log('-------');
 }
 
 

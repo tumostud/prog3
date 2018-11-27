@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Game of Life - Final | Programming 2</title>
 	<meta charset="utf8">
+	<title>Game of Life - Final | Programming 2</title>
+	<script src="/socket/socket.io.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
 	<!-- <style>
 		#test {
 			position: absolute;
@@ -16,10 +18,9 @@
 	</style> -->
 </head>
 <body>
-	<h1 id="weather" style="font-size: 40px; font-family: arial, sans-serif;"></h1>
+	<h1 id="weather" style="margin-bottom: 10px; font-size: 40px; font-family: arial, sans-serif;"></h1>
+	<p style="margin: 0; margin-bottom: 20px; font-size: 17px; font-family: Arial, Helvetica, sans-serif;">Small Tip: Click over a grass eater (yellow) to turn it to a grass eater eater (red) and vice versa.</p>
 	<!-- <div id="test">GoF</div> -->
-	<script src="/socket.io/socket.io.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
 	<script src="class.main.js"></script>
 	<script src="class.grass.js"></script>
 	<script src="class.grasseater.js"></script>

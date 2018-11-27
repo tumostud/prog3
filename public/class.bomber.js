@@ -90,6 +90,10 @@ class Bomber extends LivingCreature {
         }
     }
 
+    getBooms() {
+        return this.boomed;
+    }
+
     explode() {
         if (this.energy > 1) this.move();
 
