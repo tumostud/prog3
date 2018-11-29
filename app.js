@@ -33,7 +33,7 @@ server.listen(3000);
 io.on('connection', function (socket) {
     socket.on("send data", function (data) {
         statArr.push(data); // Adding new info to the array
-        fs.writeFile('public/data.json', JSON.stringify(statArr)); // Writing the info of the statistics in the file
+        fs.writeFile('public/data.json', JSON.stringify(statArr, null, 4)); // Writing the info of the statistics in the file
     })
 
     socket.on("get stats", function () { // When the client sends "get stats" 

@@ -53,8 +53,8 @@ function setup() {
 
         - If you want static-sized matrix, remove randMatrixRow and randMatrixCol variables and just give some numbers to row and column variables
     */
-    var randMatrixRow = Math.round(random(20, 200));
-    var randMatrixCol = Math.round(random(20, 200));
+    //var randMatrixRow = Math.round(random(20, 200));
+    //var randMatrixCol = Math.round(random(20, 200));
 
     // var row = randMatrixRow, column = randMatrixCol;
     var row = 50, column = 50;
@@ -81,7 +81,7 @@ function setup() {
             }
 
             else if (matrix[y][x] == 2) {
-                if (grassEaterArr.length <= 20) {
+                if (grassEaterArr.length <= 30) {
                     var grEater = new GrassEater(x, y);
                     grassEaterArr.push(grEater);
                 }
@@ -89,7 +89,7 @@ function setup() {
             }
 
             else if (matrix[y][x] == 3) {
-                if (grassEaterEaterArr.length <= 20) {
+                if (grassEaterEaterArr.length <= 30) {
                     var grEatEater = new GrassEaterEater(x, y);
                     grassEaterEaterArr.push(grEatEater);
                 }
@@ -117,7 +117,7 @@ function setup() {
     }
     /* console.log(grassArr);
     console.log(grassEaterArr);
-    console.log(grassEaterEaterArr); */
+    console.log(grassEaterEaterArr);*/
 }
 
 // Draw Function
@@ -180,6 +180,7 @@ function draw() {
         BombDestroyerArr[i].destroy();
         // console.log(BombDestroyerArr[i].energy);
     }
+    console.log(grassEaterArr);
     
 }
 
@@ -202,8 +203,8 @@ function getCoords() {
                 //console.log(grassEaterArr[k]);
                 //console.log('Clicked grass eater object\'s y coord: ' + grassEaterArr[k]['y']);
                 //console.log('Clicked grass eater object\'s x coord: ' + grassEaterArr[k]['x']);
-                grassEaterArr[k].die();
                 matrix[j][i] = 3;
+                grassEaterArr[k].die();
                 var grEatEater = new GrassEaterEater(i, j);
                 grassEaterEaterArr.push(grEatEater);
             }
@@ -289,6 +290,7 @@ function generateStatistics() {
     statistics.geTogee = geTogee;
     statistics.geeToge = geeToge;
     socket.emit("send data", statistics);
+    /*
     console.log('-------');
     console.log("Note: Spawn numbers are not the initial spawn numbers, but the number of overall spawns till this moment (including getting destroyed and spawned again)!!");
     console.log("Grasses Spawned: " + grassArr.length);
@@ -301,6 +303,7 @@ function generateStatistics() {
     console.log("geTogee: " + geTogee);
     console.log("geeToge: " + geeToge);
     console.log('-------');
+    */
 }
 
 

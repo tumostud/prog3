@@ -2,7 +2,7 @@
 class GrassEaterEater extends LivingCreature {
     constructor(x, y) {
         super(x, y);
-        this.energy = 4;
+        this.energy = Math.round(random(10, 20));
         this.directions = [];
     }
 
@@ -64,7 +64,7 @@ class GrassEaterEater extends LivingCreature {
                         break;
                     }
                 }
-                if(this.energy >= 5) this.mult();
+                if(this.energy >= 2) this.mult();
             }
             else this.move();
         }
