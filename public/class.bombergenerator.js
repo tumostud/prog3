@@ -1,11 +1,13 @@
-// Bomber Generator
+// Bomber Generator Class
 class BomberGenerator extends LivingCreature {
+    // Constructer
     constructor(x, y) {
         super(x, y);
         this.energy = 40;
         this.directions = [];
     }
 
+    // Direction Radius
     getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
@@ -19,11 +21,13 @@ class BomberGenerator extends LivingCreature {
         ];
     }
 
+    // Choose Cell Method
     chooseCell(character) {
         this.getNewCoordinates();
         return super.chooseCell(character);
     }
 
+    // Move Method
     move() {
         if (this.energy <= 0) this.die();
 
@@ -54,6 +58,7 @@ class BomberGenerator extends LivingCreature {
         }
     }
 
+    // Multiply Method
     mult() {
         var emptyCells = this.chooseCell(0);
         if (emptyCells.length != 0) {
@@ -70,6 +75,7 @@ class BomberGenerator extends LivingCreature {
         }
     }
 
+    // Die Method
     die() {
         matrix[this.y][this.x] = 0;
         for (var i in BombGeneratorArr) {

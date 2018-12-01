@@ -1,11 +1,13 @@
-// Grass Eater Eater
+// Grass Eater Eater Class
 class GrassEaterEater extends LivingCreature {
+    // Constructor
     constructor(x, y) {
         super(x, y);
         this.energy = Math.round(random(10, 20));
         this.directions = [];
     }
 
+    // Direction Radius
     getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
@@ -19,11 +21,13 @@ class GrassEaterEater extends LivingCreature {
         ];
     }
 
+    // Choose Cell Method
     chooseCell(character) {
         this.getNewCoordinates();
         return super.chooseCell(character);
     }
 
+    // Move Method
     move() {
         this.energy--;
         var emptyCells = this.chooseCell(0);
@@ -41,6 +45,7 @@ class GrassEaterEater extends LivingCreature {
         }
     }
 
+    // Eat Method
     eat() {
         if (this.energy <= 0) this.die();
         else {
@@ -70,6 +75,7 @@ class GrassEaterEater extends LivingCreature {
         }
     }
 
+    // Multiply Method
     mult() {
         var emptyCells = this.chooseCell(0);
         if (emptyCells.length != 0) {
@@ -88,6 +94,7 @@ class GrassEaterEater extends LivingCreature {
         }
     }
 
+    // Die
     die() {
         matrix[this.y][this.x] = 0;
         for (var i in grassEaterEaterArr) {

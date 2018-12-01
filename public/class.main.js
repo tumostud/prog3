@@ -1,4 +1,6 @@
+// Main Living Creature Class
 class LivingCreature {
+    // Constructor
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -13,8 +15,9 @@ class LivingCreature {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
-
     }
+
+    // Choose Cell Method
     chooseCell(ch) {
         var found = [];
         for (var i in this.directions) {

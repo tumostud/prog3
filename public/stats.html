@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf8">
+	<title>Game of Life - Stats | Programming 2</title>
+	<script src="/socket/socket.io.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<!-- Title -->
+	<h1 id="stats-title">Live Stats</h1>
+
+	<!-- Texts -->
+    <p class="stats-text">Adds new stats every 10 seconds.</p>
+    <p class="stats-text">Note: Spawn numbers are not the initial spawn numbers, but the number of overall spawns till this moment (including getting destroyed and spawned again)!!</p>
+	
+	<!-- All Stats -->
+	<div id="all-stats"></div>
+
+	<!-- JS File -->
+	<script src="stats.js"></script>
+</body>
+</html>

@@ -1,10 +1,12 @@
-// Grass
+// Grass Class
 class Grass extends LivingCreature {
+    // Constructor
     constructor(x, y) {
         super(x, y);
         this.multiply = Math.round(random(0, 7));
     }
 
+    // Grass Multiply Method
     multGrass() {
         this.multiply++;
         var emptyCells = this.chooseCell(0);

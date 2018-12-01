@@ -1,10 +1,13 @@
+// Bomb Destroyer Class
 class BomberDestroyer extends LivingCreature {
+    // Constructor
     constructor(x, y) {
         super(x, y);
         this.energy = 5;
         this.directions = [];
     }
 
+    // Direction Radius
     getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
@@ -18,11 +21,13 @@ class BomberDestroyer extends LivingCreature {
         ];
     }
 
+    // Choose Cell Method
     chooseCell(character) {
         this.getNewCoordinates();
         return super.chooseCell(character);
     }
 
+    // Destroy Method
     destroy() {
         var bombCells = this.chooseCell(4);
         if (bombCells.length != 0) {
@@ -48,6 +53,7 @@ class BomberDestroyer extends LivingCreature {
         else this.move();
     }
 
+    // Move Method
     move() {
         if (this.energy >= 50) this.die();
         else {
@@ -68,6 +74,7 @@ class BomberDestroyer extends LivingCreature {
         }
     }
 
+    // Die Method
     die() {
         matrix[this.y][this.x] = 0;
         for (var i in BombDestroyerArr) {

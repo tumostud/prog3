@@ -1,0 +1,77 @@
+/* Home Page Styles */
+#weather {
+    margin-bottom: 10px;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
+
+.home-texts {
+    margin: 0;
+    margin-bottom: 20px;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+
+footer p {
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    font-size: 19px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+
+/* Stats Page Styles */
+#stats-title {
+    width: 75%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    font-size: 40px;
+    font-family: arial, sans-serif;
+    font-weight: 700;
+}
+
+.stats-text {
+    width: 75%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+
+.stat-count-text {
+    width: 75%;
+    margin: 10px auto;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
+
+#stat-list {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 20px auto;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    border-radius: 5px;
+    list-style: none;
+    background: #eee; padding: 20px 10px;
+    transition: all .3s ease-in;
+}
+
+#stat-list li {
+    background: #fff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, .5);
+    border-radius: 5px;
+    margin: 15px 10px;
+    padding: 20px 10px;
+}

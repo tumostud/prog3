@@ -1,14 +1,15 @@
 // IO Socket
 var socket = io.connect('http://localhost:3000');
 
-// Matrix
-var matrix = [];
-
 // Canvas
 var cnv;
 
-// Side and Character Arrays
+// Matrix
+var matrix = [];
+// Matrix Squares' side
 var side = 10;
+
+// Character Arrays
 var grassArr = [];
 var grassEaterArr = [];
 var grassEaterEaterArr = [];
@@ -16,16 +17,16 @@ var BombArr = [];
 var BombGeneratorArr = [];
 var BombDestroyerArr = [];
 
-// Day counter and weather (seasons)
+// Day Counter and Weather (Seasons)
 var days = 0;
 var weather = "winter";
 
-// Frame Seconds
+// Frame Seconds Counter
 var frameSec = 0;
 
-// Grass Eater to Grass Eater Eater Counter
+// 'Grass Eater' to 'Grass Eater Eater' Counter
 var geTogee = 0;
-// Grass Eater Eater to Grass Eater Counter
+// 'Grass Eater Eater' to 'Grass Eater' Counter
 var geeToge = 0;
 
 // Statistics Object
@@ -42,21 +43,21 @@ var statistics = {
     "geeToge": 0
 }
 
-
 // Setup Function
 function setup() {
     /*
-        - This is a n by m matrix.
+    - If you want n by m matrix instead of n by n matrix, add randMatrixRow and randMatrixCol, and set these variables to row and column variables respectively.
 
-        - If you want n by n matrix instead of n by m matrix, remove randMatrixRow and randMatrixCol,
-        insert var randMatrix = Math.round(random(20, 200)); and set this variable to row and column variables.
+    - If you want n by n matrix instead of n by m matrix, remove randMatrixRow and randMatrixCol, insert var randMatrix = Math.round(random(20, 200)); and set this variable to row and column variables.
 
-        - If you want static-sized matrix, remove randMatrixRow and randMatrixCol variables and just give some numbers to row and column variables
+    - If you want static-sized matrix, remove randMatrixRow and randMatrixCol variables and just give some numbers to row and column variables
     */
+
     //var randMatrixRow = Math.round(random(20, 200));
     //var randMatrixCol = Math.round(random(20, 200));
-
     // var row = randMatrixRow, column = randMatrixCol;
+
+    // This is a static-sized matrix
     var row = 50, column = 50;
 
     for (var y = 0; y < row; ++y) {
@@ -69,9 +70,11 @@ function setup() {
 
     frameRate(500);
     cnv = createCanvas(matrix[0].length * side, matrix.length * side);
+    // On Matrix Cells Mouse Click
     cnv.mouseClicked(getCoords);
     background('#acacac');
 
+    // Adding Numbers to Cells and Filling Character Arrays
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
 
@@ -79,33 +82,28 @@ function setup() {
                 var gr = new Grass(x, y);
                 grassArr.push(gr);
             }
-
             else if (matrix[y][x] == 2) {
-                if (grassEaterArr.length <= 30) {
+                if (grassEaterArr.length <= 20) {
                     var grEater = new GrassEater(x, y);
                     grassEaterArr.push(grEater);
                 }
                 else matrix[y][x] = 0;
             }
-
             else if (matrix[y][x] == 3) {
-                if (grassEaterEaterArr.length <= 30) {
+                if (grassEaterEaterArr.length <= 20) {
                     var grEatEater = new GrassEaterEater(x, y);
                     grassEaterEaterArr.push(grEatEater);
                 }
                 else matrix[y][x] = 0;
             }
-
             else if (matrix[y][x] == 4) {
                 var randBomb = new Bomber(x, y);
                 BombArr.push(randBomb);
             }
-                
             else if (matrix[y][x] == 5) {
                 var randBombGen = new BomberGenerator(x, y);
                 BombGeneratorArr.push(randBombGen);
             }
-
             else if (matrix[y][x] == 6) {
                 if (BombDestroyerArr.length <= 20) {
                     var bombDest = new BomberDestroyer(x, y);
@@ -115,55 +113,57 @@ function setup() {
             }
         }
     }
-    /* console.log(grassArr);
-    console.log(grassEaterArr);
-    console.log(grassEaterEaterArr);*/
 }
 
 // Draw Function
 function draw() {
+    // Draw Matrix Function
     drawMatrix();
+    // Incrementing Day Counter and Frame Seconds Counter
     days++
     frameSec++;
-    if(days <= 10){
+
+    // Change Weather Every 25 Days
+    if(days <= 25){
         weather = "winter";
         document.body.style.background = '#f7f7f7';
         document.getElementById('weather').innerText = "Winter";
     }
-    else if(days > 10 && days < 20){
+    else if(days > 25 && days <= 50){
         weather = "spring";
         document.body.style.background = 'lightgreen';
         document.getElementById('weather').innerText = "Spring";
         document.body.style.transition = 'all .7s ease-in';
         document.getElementById('weather').style.transition = 'all .7s ease-in';
     }
-    else if(days > 20 && days < 30){
+    else if(days > 50 && days <= 75){
         weather = "summer";
         document.body.style.background = 'lightblue';
         document.getElementById('weather').innerText = "Summer";
         document.body.style.transition = 'all .7s ease-in';
         document.getElementById('weather').style.transition = 'all .7s ease-in';
     }
-    else if(days > 30 && days < 40){
+    else if(days > 75 && days <= 100){
         weather = "autumn";
         document.body.style.background = 'orange';
         document.getElementById('weather').innerText = "Autumn";
         document.body.style.transition = 'all .7s ease-in';
         document.getElementById('weather').style.transition = 'all .7s ease-in';
     }
-    else if (days == 40){
+    else if (days == 101){
         days = 0;
     }
 
-    if (frameSec == 11) {
+    // Send Statistics Data to Server Every 10 Frame Seconds
+    if (frameSec == 10) {
         generateStatistics();
         frameSec = 0;
     }
     
+    // Assigning Main Character Methods
     for (var i in grassArr) {
         grassArr[i].multGrass();
     }
-
     for (var i in grassEaterArr) {
         grassEaterArr[i].eat();
     }
@@ -178,67 +178,10 @@ function draw() {
     }
     for (var i in BombDestroyerArr) {
         BombDestroyerArr[i].destroy();
-        // console.log(BombDestroyerArr[i].energy);
-    }
-    console.log(grassEaterArr);
-    
-}
-
-function mouseClicked() {}
-function getCoords() {
-    var i, j;
-    console.log("Mouse clicked on coordinates x: " + mouseX + " and y: " + mouseY);
-    i = mouseX / 10;
-    i = Math.floor(i);
-    j = mouseY / 10;
-    j = Math.floor(j);
-    //console.log("i: " + i + " , j: " + j);
-    //console.log(matrix[j][i]);
-    if (matrix[j][i] == 2) {
-        //console.log('Grass eater arr length: ' + grassEaterArr.length);
-        //console.log('Grass eater eater arr length: ' + grassEaterEaterArr.length);
-        for (var k = 0; k < grassEaterArr.length; k++) {
-            if (grassEaterArr[k]['x'] == i && grassEaterArr[k]['y'] == j) {
-                //console.log('Clicked grass eater object:');
-                //console.log(grassEaterArr[k]);
-                //console.log('Clicked grass eater object\'s y coord: ' + grassEaterArr[k]['y']);
-                //console.log('Clicked grass eater object\'s x coord: ' + grassEaterArr[k]['x']);
-                matrix[j][i] = 3;
-                grassEaterArr[k].die();
-                var grEatEater = new GrassEaterEater(i, j);
-                grassEaterEaterArr.push(grEatEater);
-            }
-        }
-        geTogee++;
-        console.log('It\'s yellow!');
-        //console.log('Grass eater arr length: ' + grassEaterArr.length);
-        //console.log('Grass eater eater arr length: ' + grassEaterEaterArr.length);
-    }
-    else if (matrix[j][i] == 3) {
-        for (var k = 0; k < grassEaterEaterArr.length; k++) {
-            if (grassEaterEaterArr[k]['x'] == i && grassEaterEaterArr[k]['y'] == j) {
-                grassEaterEaterArr[k].die();
-                matrix[j][i] = 2;
-                var grEater = new GrassEater(i, j);
-                grassEaterArr.push(grEater);
-            }
-        }
-        geeToge++;
-        console.log('It\'s red!');
     }
 }
 
-/*
-1. Get mouse click X
-2. Get the coordinates of the clicked square X
-3. Check what character is in the square X
-4. Work with the character inside that square X
-  4.1 Remove the character X
-  4.2 Add new character 
-  4.3 Update both arrays of characters X
-*/
-
-// Draw Matrix Function
+// Draw Matrix Function (Called in Line 121)
 function drawMatrix() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -276,8 +219,44 @@ function drawMatrix() {
     }
 }
 
-// Statistics
+// On Matrix Cells Mouse Click (Called in Line 74)
+function mouseClicked() {}
+function getCoords() {
+    var i, j;
+    console.log("Mouse clicked on coordinates x: " + mouseX + " and y: " + mouseY);
+    i = mouseX / 10;
+    i = Math.floor(i);
+    j = mouseY / 10;
+    j = Math.floor(j);
+    // Yellow to Red
+    if (matrix[j][i] == 2) {
+        for (var k = 0; k < grassEaterArr.length; k++) {
+            if (grassEaterArr[k]['x'] == i && grassEaterArr[k]['y'] == j) {
+                matrix[j][i] = 3;
+                grassEaterArr[k].die();
+                var grEatEater = new GrassEaterEater(i, j);
+                grassEaterEaterArr.push(grEatEater);
+            }
+        }
+        geTogee++;
+        console.log('It was yellow. Now it\'s red!');
+    }
+    // Red to Yellow
+    else if (matrix[j][i] == 3) {
+        for (var k = 0; k < grassEaterEaterArr.length; k++) {
+            if (grassEaterEaterArr[k]['x'] == i && grassEaterEaterArr[k]['y'] == j) {
+                matrix[j][i] = 2;
+                grassEaterEaterArr[k].die();
+                var grEater = new GrassEater(i, j);
+                grassEaterArr.push(grEater);
+            }
+        }
+        geeToge++;
+        console.log('It was red. Now it\'s yellow!');
+    }
+}
 
+// Statistics (Called in Line 159)
 function generateStatistics() {
     statistics.timestamp = (new Date()).toString();
     statistics.grassSpawn = grassArr.length;
@@ -290,32 +269,12 @@ function generateStatistics() {
     statistics.geTogee = geTogee;
     statistics.geeToge = geeToge;
     socket.emit("send data", statistics);
-    /*
-    console.log('-------');
-    console.log("Note: Spawn numbers are not the initial spawn numbers, but the number of overall spawns till this moment (including getting destroyed and spawned again)!!");
-    console.log("Grasses Spawned: " + grassArr.length);
-    console.log("Grass Eaters Spawned: " + grassEaterArr.length);
-    console.log("Grass Eater Eaters Spawned: " + grassEaterEaterArr.length);
-    console.log("Bombs Spawned: " + BombArr.length);
-    console.log("Bomb Generators Spawned: " + BombGeneratorArr.length);
-    console.log("Bomb Destroyers Spawned: " + BombDestroyerArr.length);
-    console.log("Weather (Season): " + weather);
-    console.log("geTogee: " + geTogee);
-    console.log("geeToge: " + geeToge);
-    console.log('-------');
-    */
 }
-
-
-
-
-
-
 
 // Tasks
 // 1. Weather (Done)
-// 2. Gender 
+// 2. Gender (Messed Up, Broken)
 // 3. Unique Situatuion (Done)
 // 4. New Characters (6 or more) (Done) (6 Characters)
-// 5. Statistics (!!X!!)
+// 5. Statistics (Nearly Done)
 // 6. Diagrams (Not necessary)

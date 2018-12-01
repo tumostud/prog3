@@ -1,5 +1,6 @@
-// Grass Eater
+// Grass Eater Class
 class GrassEater extends LivingCreature {
+    // Constructor
     constructor(x, y) {
         super(x, y);
         this.gender = Math.round(Math.random()); // 0 - Female, 1 - Male
@@ -7,6 +8,7 @@ class GrassEater extends LivingCreature {
         this.directions = [];
     }
 
+    // Direction Radius
     getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
@@ -20,15 +22,13 @@ class GrassEater extends LivingCreature {
         ];
     }
 
+    // Choose Cell Method
     chooseCell(character) {
         this.getNewCoordinates();
         return super.chooseCell(character);
     }
 
-    gend() {
-        return this.gender;
-    }
-
+    // Eat Method
     eat() {
         var grassCells = this.chooseCell(1);
         if (grassCells.length != 0) {
@@ -55,6 +55,7 @@ class GrassEater extends LivingCreature {
         else this.move();
     }
 
+    // Move Method
     move() {
         if (this.energy <= 0) this.die();
         else {
@@ -75,7 +76,8 @@ class GrassEater extends LivingCreature {
         }
     }
 
-
+    // Custom Mult Method (With Genders, Broken!)
+    /*
     mult() {
         if (this.gender == 0) {
             this.energy--;
@@ -121,7 +123,9 @@ class GrassEater extends LivingCreature {
             this.move();
         }
     }
-    /*
+    */
+
+    // Normal Mult Method (Without Genders)
     mult() {
         var emptyCells = this.chooseCell(0);
         if (emptyCells.length != 0) {
@@ -142,9 +146,8 @@ class GrassEater extends LivingCreature {
             else this.energy = 4; // On Spring and Autumn multiply regularly
         }
     }
-    */
     
-    
+    // Die Method
     die() {
         matrix[this.y][this.x] = 0;
         for (var i in grassEaterArr) {

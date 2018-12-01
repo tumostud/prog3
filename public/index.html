@@ -3,24 +3,26 @@
 <head>
 	<meta charset="utf8">
 	<title>Game of Life - Final | Programming 2</title>
+	<!-- Scripts -->
 	<script src="/socket/socket.io.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
-	<!-- <style>
-		#test {
-			position: absolute;
-			top: 50%;
-			right: 50%;
-			width: 200px;
-			height: 200px;
-			background: lightblue;
-			text-align: center;
-		}
-	</style> -->
+	<!-- CSS File -->
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<h1 id="weather" style="margin-bottom: 10px; font-size: 40px; font-family: arial, sans-serif;"></h1>
-	<p style="margin: 0; margin-bottom: 20px; font-size: 17px; font-family: Arial, Helvetica, sans-serif;">Small Tip: Click over a grass eater (yellow) to turn it to a grass eater eater (red) and vice versa.</p>
-	<!-- <div id="test">GoF</div> -->
+	<!-- Title -->
+	<h1 id="weather"></h1>
+
+	<!-- Texts -->
+	<p class="home-texts">Small Tip: Click over a grass eater (yellow) to turn it to a grass eater eater (red) and vice versa.</p>
+	<p class="home-texts">Check some live stats from <a href="stats.html" target="_blank" style="color: #333;">here</a>.</p>
+
+	<!-- Footer -->
+	<footer>
+		<p>Project done by <a href="https://kkasbarian.com" target="_blank" style="color: #333;">Kourken K.</a> for final projects of Programming 2-3 at TUMO.</p>
+	</footer>
+
+	<!-- JS Files -->
 	<script src="class.main.js"></script>
 	<script src="class.grass.js"></script>
 	<script src="class.grasseater.js"></script>
