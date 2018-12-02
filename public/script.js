@@ -276,5 +276,5 @@ function generateStatistics() {
 // 2. Gender (Messed Up, Broken)
 // 3. Unique Situatuion (Done)
 // 4. New Characters (6 or more) (Done) (6 Characters)
-// 5. Statistics (Nearly Done)
+// 5. Statistics (Done)
 // 6. Diagrams (Not necessary)
