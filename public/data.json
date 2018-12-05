@@ -1,13 +1,13 @@
 [
     {
-        "timestamp": "Sun Dec 02 2018 01:06:49 GMT+0400 (Armenia Standard Time)",
-        "grassSpawn": 1891,
-        "grassEaterSpawn": 606,
-        "grassEaterEaterSpawn": 3,
-        "bombSpawn": 374,
-        "bombGeneratorSpawn": 363,
-        "bombdestroyerSpawn": 21,
-        "weather": "winter",
+        "timestamp": "Wed Dec 05 2018 19:38:09 GMT+0400 (Armenia Standard Time)",
+        "grassSpawn": 6082,
+        "grassEaterSpawn": 1091,
+        "grassEaterEaterSpawn": 0,
+        "bombSpawn": 0,
+        "bombGeneratorSpawn": 0,
+        "bombdestroyerSpawn": 0,
+        "weather": "summer",
         "geTogee": 0,
         "geeToge": 0
     }

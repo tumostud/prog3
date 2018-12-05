@@ -76,56 +76,30 @@ class GrassEater extends LivingCreature {
         }
     }
 
-    // Custom Mult Method (With Genders, Broken!)
-    /*
+    // Custom Mult Method (With Genders)
     mult() {
         if (this.gender == 0) {
             this.energy--;
             var sameCell = this.chooseCell(2);
-            if (sameCell.length != 0) {
-                var randomSameCell = random(sameCell);
-                // console.log(sameCell.length);
-                //console.log(sameCell);
-                // console.log(this.gender);
+            var emptyCells = this.chooseCell(0);
+            if (sameCell.length != 0 && emptyCells.length != 0) {
+                var randomSameCell = random(emptyCells);
+                var a = randomSameCell[0];
+                var b = randomSameCell[1];
 
-                var x = randomSameCell[0];
-                var y = randomSameCell[1];
-
-                for (var i in grassEaterArr) {
-                    if (x == grassEaterArr[i].x && y == grassEaterArr[i].y && grassEaterArr[i].gender == 1) {
-                        //console.log("Gender: " + grassEaterArr[i].gender);
-                        //console.log("X: " + grassEaterArr[i].x);
-                        //console.log("Y: " + grassEaterArr[i].y);
-                        var emptyCells = this.chooseCell(0);
-                        if (emptyCells.length != 0) {
-                            var randomCell = random(emptyCells);
-                            // console.log(emptyCells.length);
-                            //console.log(emptyCells);
-                            // console.log(this.gender);
-
-                            var a = randomCell[0];
-                            var b = randomCell[1];
-                            matrix[b][a] = 2;
-            
-                            grassEaterArr.push(new GrassEater(a, b));
-                            console.log('Done');
-                        }
-                    }
-                }   
+                grassEaterArr.push(new GrassEater(a, b));
+                matrix[b][a] = 2;
+                console.log('New Grass Eater was born successfully!');
             }
-            //if (weather == 'winter') this.energy = 4; // On Winter multiply so little
-            //else if (weather == 'summer') this.energy = 8; // On Summer multiply a bit more
-            //else this.energy = 6; // On Spring and Autumn multiply regularly
-            this.energy = 10;
-        }
-
-        else {
-            this.move();
+            if (weather == 'winter') this.energy = 13; // On Winter multiply less
+            else if (weather == 'summer') this.energy = 7; // On Summer multiply more
+            else this.energy = 10; // On Spring and Autumn multiply regularly
+            // this.energy = 10;
         }
     }
-    */
 
     // Normal Mult Method (Without Genders)
+    /*
     mult() {
         var emptyCells = this.chooseCell(0);
         if (emptyCells.length != 0) {
@@ -146,7 +120,8 @@ class GrassEater extends LivingCreature {
             else this.energy = 4; // On Spring and Autumn multiply regularly
         }
     }
-    
+    */
+
     // Die Method
     die() {
         matrix[this.y][this.x] = 0;
