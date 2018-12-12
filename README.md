@@ -135,6 +135,6 @@ Enjoy the game!!! :D
 ## Thanks
 **_Thanks_** to the workshop leaders for teaching us some advanced **JS**, **Node.js**, **NPM** and some if its frameworks throughout the Programming 2 and 3 workshops. It will help to advance my career and further learn more advanced **JS**, **Node.js** in depth and become a **_Full-Stack Developer_**.
 
-I know that there could be a bug or two (or many!) in the code, but I hope to pass the Programming 3 course, as I worked hard on this project while I had university exams and also work after uni.
+I know that there could be a bug or two (or many!) in the code, but I hope that you like the project.
 
 **Thanks again!!**
